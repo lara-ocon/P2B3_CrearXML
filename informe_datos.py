@@ -61,5 +61,5 @@ if __name__ == "__main__":
         i += 1
 
     # guardamos el árbol en un fichero xml
-    with open('informe_datos.xml', 'w') as f:
+    with open('reporte_tipologia_datos.xml', 'w') as f:
         f.write(prettify(root))
