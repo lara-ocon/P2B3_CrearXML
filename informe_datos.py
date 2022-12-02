@@ -5,6 +5,7 @@
 # Importamos las librerías necesarias
 import pandas as pd
 import xml.etree.ElementTree as ET
+from xml.dom import minidom
 
 def extract():
     # cargamos los dataframes
@@ -18,6 +19,13 @@ def extract():
 
     return [df_pizzas, df_pizza_types, df_data_dictionary, df_order_details_2015, df_order_details_2016, df_orders_2015, df_orders_2016]
 
+
+def prettify(elem):
+    """Return a pretty-printed XML string for the Element.
+    """
+    rough_string = ET.tostring(elem)
+    reparsed = minidom.parseString(rough_string)
+    return reparsed.toprettyxml(indent="    ")
 
 if __name__ == "__main__":
 
@@ -53,4 +61,5 @@ if __name__ == "__main__":
         i += 1
 
     # guardamos el árbol en un fichero xml
-    arbol.write('reporte_tipologia_datos2.xml')
+    with open('informe_datos.xml', 'w') as f:
+        f.write(prettify(root))
